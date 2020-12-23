@@ -1,79 +1,66 @@
-# P2 - Portfolio App 
-
-
-## Phase 2 of Portfolio Application
-
-So far you have built a single page portfolio in React. Now, our goal is add new pages in your website. 
-
-**Project Requirement**
+## **Project 5 - Github Battle**
 
 ---
 
-Your application should have Home, Project, Blog and About Page. 
+### **Description**
 
-**Header**
+You have to consume github user, repository and few other api  and play with it. More description is give below. 
 
-- Create a Navbar with 3 links
-    -  One Right Side, there should be a Home Button with your name or your image.
-    -  On Left Side, there should be 3 Links.  Project, Blog, About
+**API Usage**
 
-**Footer**
+All the API's are public api of github, i.e they don't require any authentication/ token for usage.
 
-- Your application should have a footer.
-- You are free to chooose any footer design.
+Github User API - 
 
-Reference - 
-   ![footerr.PNG](https://cdn.hashnode.com/res/hashnode/image/upload/v1607016468063/Lw0HZf9_8.png)
+[https://docs.github.com/en/free-pro-team@latest/rest/reference/users#get-a-user](https://docs.github.com/en/free-pro-team@latest/rest/reference/users#get-a-user)
 
+Github Repository API - 
 
+[https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#list-repositories-for-a-user](https://docs.github.com/en/free-pro-team@latest/rest/reference/repos#list-repositories-for-a-user) 
 
-**Home Page**
+Github Search API -
 
-- Create a Profile Info component for homepage.
-    - This component should show detail about your like Name, Your Profile Pic, short bio, and your top 3 social media URLs.
+[https://docs.github.com/en/free-pro-team@latest/rest/reference/search#search-repositories](https://docs.github.com/en/free-pro-team@latest/rest/reference/search#search-repositories)
 
-    **Reference Example** 
-    
-![bioo.PNG](https://cdn.hashnode.com/res/hashnode/image/upload/v1607016498508/5DSywl4LX.png)
+**Part 1  ( Github Explore Page)**
 
+---
 
-    - The second component on the Home page should be a container that describes you, what you are doing, your goals, your interests. This description should be in less than 150 words.
+- Create a HomePage having 2 buttons in NavBar with
+    - Explore
+    - Battle
 
-**Project Page**
+- In this module we have to work on Explore page.
+- Explore page is available on  /explore route.
 
-- Project page should have a h1 heading tag with name "All Projects"
-- Wrap all Project list in container.
-- use margin of 16px between two blog list.
+- Display a nav to select the topic ("All", 'javascript', 'react', 'python', 'golang')
+- Selecting/ Clicking on any of the topic showing the popular repositories of that topics sorted with max. number of stars. ( Can display max. 30 repositories )
+- API that can be Used for it is :
+[`https://api.github.com/search/repositories?q=stars:>1+language:golang&sort=stars&order=desc&type=Repositories`](https://api.github.com/search/repositories?q=stars:%3E1+language:golang&sort=stars&order=desc&type=Repositories)
+- Replace keyword in this api endpoint which is currently written as 'golang' with the topic selected by user. (value with key as `stargazers_count` is the number of stars in the api response).
 
-Each Project should contains details like
+![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/21796cff-c81e-468a-b49a-503b6f612924/Screenshot_2020-12-22_at_10.51.49_PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/21796cff-c81e-468a-b49a-503b6f612924/Screenshot_2020-12-22_at_10.51.49_PM.png)
 
-- Name
-- Short description about project.
-- Technologies you are using, eg. - React, Nodejs, HTML, CSS
-- Github repo link.
+**Part 2 ( Github Battle Page)**
 
-**Blog Page**
+---
 
-- Blog page should have a h1 heading tag with name "All Blogs"
-- Wrap all blog list in container.
-- use margin of 16px between two blog list.
+- Create  two input fields to ask for username and a button to submit.
+- on Submit, get info about the user and repositories using github API.
+- Use api data to calculate score for each user nad display winner/loser for the battle.
 
+- Api that can be used for this purpose are:
+    - `https://api.github.com/users/{username}` —> to get user profile info.
+    - `[https://api.github.com/users/{username}/repos?per_page=100](https://api.github.com/users/{username}/repos?per_page=100)` —> to get list of repositories for user.
 
-----
+- once profile and repostiories data is available use it to calculate score based on `total_Score=profile_follower_count + total_stars_count_of_all_repos`
 
-Note 
+- Based on Score, display  result accordingly.
 
-- - All Data like profile data, blog data, project data should be in separate files and imported to module comonent when required. 
+    UI mocks (for reference):
 
-- **DON'T HARD CODE DATA IN COMPONENT**. 
+    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6fd8524f-d033-4785-b5ec-f8ae482180c3/Screenshot_2020-12-22_at_10.52.01_PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/6fd8524f-d033-4785-b5ec-f8ae482180c3/Screenshot_2020-12-22_at_10.52.01_PM.png)
 
-- The design reference given in the documentation are just for reference you can use any design.
-- Your project should follow the defined points and have defined pages.
+    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/207d9b31-68ef-4c9f-8e52-da2d04d3a6b7/Screenshot_2020-12-23_at_5.20.17_PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/207d9b31-68ef-4c9f-8e52-da2d04d3a6b7/Screenshot_2020-12-23_at_5.20.17_PM.png)
 
------
-
-**About Frontbench Camp**
-
-Frontbench FullStack Camp is 12 weeks online camp to help people learn full-stack web development by building project. In 12 weeks, you build 12 (mini + major) project with 1:1 Mentor and peer community support. 
-
-To Know more and see our closed cohort sessions, visit --- [LINK](https://bit.ly/33kujsS)
+    ![https://s3-us-west-2.amazonaws.com/secure.notion-static.com/04a03df6-7298-42f8-918a-d51adcd37ac9/Screenshot_2020-12-23_at_5.19.29_PM.png](https://s3-us-west-2.amazonaws.com/secure.notion-static.com/04a03df6-7298-42f8-918a-d51adcd37ac9/Screenshot_2020-12-23_at_5.19.29_PM.png)
