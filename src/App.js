@@ -1,25 +1,43 @@
+import React from 'react';
+import ReactDOM from 'react-dom';
 import logo from './logo.svg';
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
+import { Link,Route, Switch,BrowserRouter } from 'react-router-dom';
+import Home from "./component/Home.js";
+
+import Explore from "./component/Explore.js";
+import Battle from "./component/Battle.js";
+
+import { Navbar, NavItem, NavDropdown, MenuItem, Nav, Row,Col,Container,Button } from 'react-bootstrap';
+import Topic from './component/Topic';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  
+  let navbar=(
+          <Container fluid style={{ backgroundColor: '' ,color:"#c46666"  }} >
+        <Row>
+             <Col lg={{ span:1, offset: 9}} xs={4}> <Button variant="Dark"><Link to="/" >Home</Link></Button></Col>
+             <Col lg={1} xs={4}> <Button variant="Dark"><Link to="/Explore" >Explore</Link></Button></Col>
+              <Col lg={1} xs={4}><Button variant="Dark"><Link to="/Battle" >Battle</Link> </Button></Col>
+        </Row>
+        </Container>
+
+      );
+  let s=  (<div>
+  {navbar}
+ <main>
+  <Switch>
+               <Route path="/" component={Home} exact />
+               <Route path="/Explore" component={Explore} exact/>
+               <Route path="/Battle" component={Battle} exact/>
+   </Switch> 
+ </main> 
+
+ </div>);
+ console.log(fetch("https://api.github.com/users/dipakkr/repos?per_page=100").then(response=>response.json()));
+//<Topic language="javascript" />
+  return (<div> <Battle/></div>);
 }
 
 export default App;
