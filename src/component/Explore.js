@@ -12,15 +12,22 @@ import Topic from "./Topic.js";
 </Route>*/
 //
 function Explore()
-    {    let topic =["All", 'javascript', 'react', 'python', 'golang'];
+    {    
+        
 
          let  [lang, setlang] = useState(null);
 
          let [loading,setloading]=useState(0);
-
-         let topic_html=topic.map((item)=><Col lg={{ span:1}} xs={2}> <Button variant="Dark"   onClick={(item)=>{setlang(item);setloading(1);setitems("");}}>{item}</Button></Col>);
+         //let [rerun,setrerun]=useState(1);
          
          let  [items, setitems] = useState(null);
+         let topic =["All", 'javascript', 'react', 'python', 'golang'];
+         let topic_html=0;
+         topic_html=topic.map((item)=><Col lg={{ span:1}} xs={2}> <Button variant="Dark"  id={item} onClick={()=>{setlang(item);setloading(1);setitems("");}}>{item}</Button></Col>);
+              
+    
+        
+         
            
             useEffect(()=> {    if(lang!=null) 
                                    { 
