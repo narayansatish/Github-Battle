@@ -18,7 +18,7 @@ function Explore()
 
          let [loading,setloading]=useState(0);
 
-         let topic_html=topic.map((item)=><Col lg={{ span:1}} xs={2}> <Button variant="Dark"   onClick={(item)=>{setlang(item);setloading(1);}}>{item}</Button></Col>);
+         let topic_html=topic.map((item)=><Col lg={{ span:1}} xs={2}> <Button variant="Dark"   onClick={(item)=>{setlang(item);setloading(1);setitems("");}}>{item}</Button></Col>);
          
          let  [items, setitems] = useState(null);
            
