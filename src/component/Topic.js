@@ -7,7 +7,7 @@ import ReactDOM from 'react-dom';
 import { Link,Route, Switch,BrowserRouter   } from 'react-router-dom';
 
 function Topic(props)
-        {   let lang_api = "https://api.github.com/search/repositories?q=stars:%3E1+language:"+"python"+"&sort=stars&order=desc&type=Repositories";
+        {   let lang_api = "https://api.github.com/search/repositories?q=stars:%3E1+language:"+props.language+"&sort=stars&order=desc&type=Repositories";
           
             let  [items, setitems] = useState(null);
            

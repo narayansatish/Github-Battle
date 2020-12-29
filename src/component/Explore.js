@@ -16,16 +16,16 @@ function Explore()
         console.log(topic);
          let topic_html=topic.map((item)=><Col lg={{ span:1}} xs={2}> <Button variant="Dark"><Link to={"/Explore/"+item} >{item}</Link></Button></Col>);
          console.log(topic_html);
-         let switchone=topic.map((item)=><Route path={"/Explore/"+item} component={Topic } exact />);
+         let switchone=topic.map((item)=><Route path={"/Explore/"+item} component={(item)=><Topic language={item}/> } exact />);
          console.log(switchone); 
         return (<div>
                     <Row>
                         {topic_html}
                     </Row>
                     <main>
-                        <switch>
+                        <Switch>
                             {switchone}
-                        </switch>
+                        </Switch>
                     </main>
                 </div>
 
