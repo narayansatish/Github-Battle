@@ -135,10 +135,10 @@ function Battle() {
         } else {
             if (user1 > user2) {
                 setUser1Result("WINNER");
-                setUser2Result("loser");
+                setUser2Result("lOSER");
             } else {
                 setUser2Result("WINNER");
-                setUser1Result("loser");
+                setUser1Result("LOSER");
             }
         }
         setUser1Score(user1);
@@ -298,40 +298,42 @@ function Battle() {
         <div>
             <h1 className="mb-5">Github Battle</h1>
             {user1result != null && user2result != null ? (
-                <Row>
-                    <Col xs={{ "span": 3 }}>
-                        <Row>{user1result}</Row>
+                <Row style={{ fontSize: "1.5rem" }}>
+                    <Col className="text-center">
+                        <Row >{user1result}</Row>
                         <Row>Score={user1Score} </Row>
                     </Col>
-                    <Col>
-                        <Row>{user2result}</Row>
+                    <Col className="text-center" xs={{ offset: 2 }}>
+                        <Row >{user2result}</Row>
                         <Row>Score={user2Score} </Row>
                     </Col>
                 </Row>
             ) : (
                 ""
-            )}
+            )
+            }
             <Row>
                 <Col >{userInput1}</Col>
                 <Col xs={{ offset: 1 }}> {userInput2}</Col>
             </Row>
-            {user1Status == "profile" &&
-                user2Status == "profile" &&
-                user1result == null &&
-                user2result == null ? (
-                <div className="text-center">
-                    <button
-                        type="button"
-                        className="btn btn-success mt-5 "
-                        onClick={onClickOnBattle}
-                        style={{ fontSize: "3rem" }}
-                    >
-                        BATTLE{" "}
-                    </button>
-                </div>
-            ) : (
-                ""
-            )
+            {
+                user1Status == "profile" &&
+                    user2Status == "profile" &&
+                    user1result == null &&
+                    user2result == null ? (
+                    <div className="text-center">
+                        <button
+                            type="button"
+                            className="btn btn-success mt-5 "
+                            onClick={onClickOnBattle}
+                            style={{ fontSize: "3rem" }}
+                        >
+                            BATTLE{" "}
+                        </button>
+                    </div>
+                ) : (
+                    ""
+                )
             }
             { console.log(user1Status, "1status", user2Status, "2status", user1result, "1result", user2result, "2result")}
         </div>
