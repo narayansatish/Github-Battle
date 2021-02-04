@@ -17,9 +17,9 @@ function App() {
   let navbar = (
     <Container fluid style={{ backgroundColor: '', color: "#c46666" }} >
       <Row>
-        <Col lg={{ span: 1, offset: 9 }} xs={4} > <Button variant="Dark"><Link to="/" style={{ fontSize: "1.5rem" }}>Home</Link></Button></Col>
+
         <Col lg={1} xs={4}> <Button variant="Dark" ><Link to="/Explore" style={{ fontSize: "1.5rem" }}>Explore</Link></Button></Col>
-        <Col lg={1} xs={4}><Button variant="Dark" ><Link to="/Battle" style={{ fontSize: "1.5rem" }}>Battle</Link> </Button></Col>
+        <Col lg={1} xs={4}><Button variant="Dark" ><Link to="/" style={{ fontSize: "1.5rem" }}>Battle</Link> </Button></Col>
       </Row>
     </Container>
 
@@ -28,9 +28,9 @@ function App() {
     {navbar}
     <div className="container">
       <Switch>
-        <Route path="/" component={Home} exact />
+
         <Route path="/Explore" component={Explore} exact />
-        <Route path="/Battle" component={Battle} exact />
+        <Route path="/" component={Battle} exact />
       </Switch>
     </div>
 
