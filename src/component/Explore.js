@@ -15,7 +15,7 @@ import Topic from "./Topic.js";
 function Explore() {
 
 
-    let [lang, setlang] = useState(null);
+    let [lang, setlang] = useState("All");
 
     let [loading, setloading] = useState(0);
     //let [rerun,setrerun]=useState(1);
@@ -23,7 +23,7 @@ function Explore() {
     let [items, setitems] = useState(null);
     let topic = ["All", 'javascript', 'react', 'python', 'golang'];
     let topic_html = 0;
-    topic_html = topic.map((item) => <Col  > <Button variant="Dark" id={item} onClick={() => { setlang(item); setloading(1); setitems(""); }} style={{ fontSize: "2rem", color: "#eb34a2" }} >{item}</Button></Col>);
+    topic_html = topic.map((item) => <Col  > <Button variant="Dark" id={item} onClick={() => { setlang(item); setloading(1); setitems(""); }} style={{ fontSize: "2rem", color: "black" }} >{item}</Button></Col>);
 
 
 
@@ -60,8 +60,11 @@ function Explore() {
             {topic_html}
         </Row>
         <main >
+
+
+            {lang != null ? <h4 style={{ paddingTop: "1rem", color: "black" }}>Top 30 in {lang} Category.</h4> : ''}
             {loading ? <div style={{ textAlign: 'center', paddingTop: "6rem" }}><Loader type="TailSpin" color="red" height={80} width={80} /> </div> : ""}
-            <div style={{ paddingTop: "4rem", display: "flex", flexWrap: "wrap" }}>{lang != null ? items : ''}</div>
+            <> <div style={{ paddingTop: "1rem", display: "flex", flexWrap: "wrap" }}>{lang != null ? items : ''}</div></>
 
         </main>
     </div>
