@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 
-import { Navbar, NavItem, NavDropdown, MenuItem, Nav, Row, Col, Container, Button } from 'react-bootstrap';
+import { Navbar, NavItem, NavDropdown, MenuItem, Nav, Row, Col, Container, Button, Card } from 'react-bootstrap';
 
 import ReactDOM from 'react-dom';
+import Loader from 'react-loader-spinner';
 
 import { Link, Route, Switch, BrowserRouter } from 'react-router-dom';
 
@@ -36,7 +37,17 @@ function Explore() {
 
                 items.sort((a, b) => a["stargazers_count"] < b["stargazers_count"]);
 
-                let top_30 = items.map((item) => <div><img src={item["owner"]["avatar_url"]} /><h3>{item["full_name"]}</h3><h4>{item["stargazers_count"]}</h4></div>);
+                let top_30 = items.map((item) => <Card style={{ width: '18rem', padding: "1rem", margin: "1rem", backgroundColor: "steelblue" }}>
+                    <Card.Img variant="top" src={item["owner"]["avatar_url"]} style={{ borderRadius: "50%", borderColor: "red" }} />
+                    <Card.Body style={{ color: "white", textAlign: "center" }}>
+                        <Card.Title>{item["full_name"]}</Card.Title>
+                        <Card.Text>
+                            <i class="bi bi-star-fill"> {item["stargazers_count"]}</i>
+
+                        </Card.Text>
+
+                    </Card.Body>
+                </Card>);
                 setitems(top_30);
                 setloading(0);
             });
@@ -48,9 +59,9 @@ function Explore() {
         <Row >
             {topic_html}
         </Row>
-        <main>
-            {loading ? <h1>loading</h1> : ""}
-            {lang != null ? items : ''}
+        <main >
+            {loading ? <div style={{ textAlign: 'center', paddingTop: "6rem" }}><Loader type="TailSpin" color="red" height={80} width={80} /> </div> : ""}
+            <div style={{ paddingTop: "4rem", display: "flex", flexWrap: "wrap" }}>{lang != null ? items : ''}</div>
 
         </main>
     </div>
@@ -60,3 +71,4 @@ function Explore() {
 
 }
 export default Explore;
+//<div style={{ border: "5px solid red", margin: "1rem" }}><img style={{ width: "4rem", height: "4rem" }} src={item["owner"]["avatar_url"]} /><p>{item["full_name"]}</p><h4>{item["stargazers_count"]}</h4></div>

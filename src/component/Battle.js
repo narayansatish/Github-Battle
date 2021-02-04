@@ -12,10 +12,12 @@ import {
 } from "react-bootstrap";
 
 import ReactDOM from "react-dom";
+import Loader from "react-loader-spinner";
 
 import { Link, Route, Switch, BrowserRouter } from "react-router-dom";
 
 function Battle() {
+
     let [userName1, setUserName1] = useState("");
     let [userName2, setUserName2] = useState("");
 
@@ -54,6 +56,7 @@ function Battle() {
     };
 
     let player1_getinfo = () => {
+        setUser1Info("loading");
         let profile_api = "https://api.github.com/users/" + userName1;
         fetch(profile_api)
             .then((response) => response.json())
@@ -74,6 +77,7 @@ function Battle() {
 
     let player2_getinfo = () => {
         let profile_api = "https://api.github.com/users/" + userName2;
+        setUser2Info("loading")
         fetch(profile_api)
             .then((response) => response.json())
             .then((data) => {
@@ -164,42 +168,46 @@ function Battle() {
             );
             user1Status = "input";
         } else {
-            userInput1 = (
-                <div>
-                    <img style={{ width: "80%" }}
-                        src={user1Info["avatar_url"]}
-                    ></img>
-                    <h3 className="text-center" style={{ fontSize: "1.5rem" }}>
-                        {user1Info["login"]}
-                    </h3>
-                    <Row style={{ fontSize: "1.5rem" }}>
-                        <Col >
-                            Follower:
-                                                        {user1Info["followers"]}
-                        </Col>
-                        <Col>
-                            Following:
-                                                        {user1Info["following"]}
-                        </Col>
-                    </Row>
-                    <button
-                        style={{ fontSize: "1.5rem" }}
-                        type="button"
-                        className="btn btn-primary"
-                        id="player2"
-                        onClick={() => {
-                            setUserName1(null);
-                            setUser1Info(null);
-                            setUser1Result(null);
-                            setUser1Status("input");
-                            setUser2Result(null);
+            if (user1Info == "loading")
+                userInput1 = <Loader type="Circles" color="#00BFFF" style={{ height: "1.5rem", width: "1.5rem" }} />;
 
-                        }}
-                    >
-                        Reset{" "}
-                    </button>
-                </div>
-            );
+            else
+                userInput1 = (
+                    <div>
+                        <img style={{ width: "80%" }}
+                            src={user1Info["avatar_url"]}
+                        ></img>
+                        <h3 className="text-center" style={{ fontSize: "1.5rem" }}>
+                            {user1Info["login"]}
+                        </h3>
+                        <Row style={{ fontSize: "1.5rem" }}>
+                            <Col >
+                                Follower:
+                                                        {user1Info["followers"]}
+                            </Col>
+                            <Col>
+                                Following:
+                                                        {user1Info["following"]}
+                            </Col>
+                        </Row>
+                        <button
+                            style={{ fontSize: "1.5rem" }}
+                            type="button"
+                            className="btn btn-primary"
+                            id="player2"
+                            onClick={() => {
+                                setUserName1(null);
+                                setUser1Info(null);
+                                setUser1Result(null);
+                                setUser1Status("input");
+                                setUser2Result(null);
+
+                            }}
+                        >
+                            Reset{" "}
+                        </button>
+                    </div>
+                );
         }
     } else userInput1 = input1;
     console.log(userInput1);
@@ -257,49 +265,53 @@ function Battle() {
             );
             user2Status = "input";
         } else {
-            userInput2 = (
-                <div>
-                    <img style={{ width: "80%" }}
-                        src={user2Info["avatar_url"]}
-                    ></img>
-                    <h3 className="text-center" style={{ fontSize: "1.5rem" }}>
-                        {user2Info["login"]}
-                    </h3>
-                    <Row style={{ fontSize: "1.5rem" }}>
-                        <Col>
-                            Follower:
+            if (user2Info == "loading")
+                userInput2 = <Loader type="Circles" color="#00BFFF" style={{ height: "1.5rem", width: "1.5rem" }} />;
+
+            else
+                userInput2 = (
+                    <div>
+                        <img style={{ width: "80%" }}
+                            src={user2Info["avatar_url"]}
+                        ></img>
+                        <h3 className="text-center" style={{ fontSize: "1.5rem" }}>
+                            {user2Info["login"]}
+                        </h3>
+                        <Row style={{ fontSize: "1.5rem" }}>
+                            <Col>
+                                Follower:
                                                         {user2Info["followers"]}
-                        </Col>
-                        <Col>
-                            Following:
+                            </Col>
+                            <Col>
+                                Following:
                                                         {user2Info["following"]}
-                        </Col>
-                    </Row>
-                    <button
-                        style={{ fontSize: "1.5rem" }}
-                        type="button"
-                        className="btn btn-primary"
-                        id="player2"
-                        onClick={() => {
-                            setUserName2(null);
-                            setUser2Info(null);
-                            setUser2Result(null);
-                            setUser2Status("input");
-                            setUser1Result(null);
-                        }}
-                    >
-                        Reset{" "}
-                    </button>
-                </div>
-            );
+                            </Col>
+                        </Row>
+                        <button
+                            style={{ fontSize: "1.5rem" }}
+                            type="button"
+                            className="btn btn-primary"
+                            id="player2"
+                            onClick={() => {
+                                setUserName2(null);
+                                setUser2Info(null);
+                                setUser2Result(null);
+                                setUser2Status("input");
+                                setUser1Result(null);
+                            }}
+                        >
+                            Reset{" "}
+                        </button>
+                    </div>
+                );
         }
     } else userInput2 = input2;
     return (
-        <div>
+        <div >
             <h1 className="mb-5">Github Battle</h1>
             {user1result != null && user2result != null ? (
                 <Row style={{ fontSize: "1.5rem" }}>
-                    <Col className="text-center">
+                    <Col className="text-center" style={{ color: "#1a1a2e" }} >
                         <Row >{user1result}</Row>
                         <Row>Score={user1Score} </Row>
                     </Col>
@@ -326,7 +338,7 @@ function Battle() {
                             type="button"
                             className="btn btn-success mt-5 "
                             onClick={onClickOnBattle}
-                            style={{ fontSize: "3rem" }}
+                            style={{ fontSize: "2rem" }}
                         >
                             BATTLE{" "}
                         </button>
