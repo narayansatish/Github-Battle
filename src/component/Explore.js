@@ -23,7 +23,7 @@ function Explore() {
     let [items, setitems] = useState(null);
     let topic = ["All", 'javascript', 'react', 'python', 'golang'];
     let topic_html = 0;
-    topic_html = topic.map((item) => <Col  > <Button variant="Dark" id={item} onClick={() => { setlang(item); setloading(1); setitems(""); }} style={{ fontSize: "1rem", color: "#eb34a2" }}>{item}</Button></Col>);
+    topic_html = topic.map((item) => <Col  > <Button variant="Dark" id={item} onClick={() => { setlang(item); setloading(1); setitems(""); }} style={{ fontSize: "2rem", color: "#eb34a2" }} >{item}</Button></Col>);
 
 
 

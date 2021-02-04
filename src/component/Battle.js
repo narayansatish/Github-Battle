@@ -55,7 +55,8 @@ function Battle() {
         setUserName2(e.target.value);
     };
 
-    let player1_getinfo = () => {
+    let player1_getinfo = (e) => {
+
         setUser1Info("loading");
         let profile_api = "https://api.github.com/users/" + userName1;
         fetch(profile_api)
@@ -75,7 +76,8 @@ function Battle() {
             });
     };
 
-    let player2_getinfo = () => {
+    let player2_getinfo = (e) => {
+
         let profile_api = "https://api.github.com/users/" + userName2;
         setUser2Info("loading")
         fetch(profile_api)
@@ -97,7 +99,7 @@ function Battle() {
 
     let userInput1,
         input1 = (
-            <div>
+            <form>
                 <Row>
                     <Col>
                         <label for="player1_box">
@@ -107,9 +109,11 @@ function Battle() {
                             type="text"
                             className="form-control"
                             value={userName1}
+
                             onChange={
                                 player1_OnChange
                             }
+                            required
                         />
                     </Col>
                 </Row>
@@ -127,7 +131,7 @@ function Battle() {
                         </button>
                     </Col>
                 </Row>
-            </div>
+            </form>
         );
 
     let onClickOnBattle = () => {
@@ -138,11 +142,11 @@ function Battle() {
             setUser2Result("We are same");
         } else {
             if (user1 > user2) {
-                setUser1Result("WINNER");
-                setUser2Result("lOSER");
+                setUser1Result("WINNER 💪");
+                setUser2Result("lOSER 😞");
             } else {
-                setUser2Result("WINNER");
-                setUser1Result("LOSER");
+                setUser2Result("WINNER 💪");
+                setUser1Result("LOSER 😞");
             }
         }
         setUser1Score(user1);
@@ -224,6 +228,7 @@ function Battle() {
                             type="text"
                             className="form-control"
                             value={userName2}
+                            required="required"
                             onChange={
                                 player2_OnChange
                             }
@@ -311,11 +316,11 @@ function Battle() {
             <h1 className="mb-5">Github Battle</h1>
             {user1result != null && user2result != null ? (
                 <Row style={{ fontSize: "1.5rem" }}>
-                    <Col className="text-center" style={{ color: "#1a1a2e" }} >
+                    <Col className="text-center" style={{ color: "#1a1a2e", marginLeft: "1rem" }} >
                         <Row >{user1result}</Row>
                         <Row>Score={user1Score} </Row>
                     </Col>
-                    <Col className="text-center" xs={{ offset: 2 }}>
+                    <Col className="text-center" xs={{ offset: 1 }}>
                         <Row >{user2result}</Row>
                         <Row>Score={user2Score} </Row>
                     </Col>
